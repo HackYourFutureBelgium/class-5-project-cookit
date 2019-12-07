@@ -6,7 +6,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import InputBase from '@material-ui/core/InputBase';
-import ingredients from './ingredients';
+import ingredients from '../ingredients';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -125,15 +125,26 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
-
 let IngredientComponent = ({ item, remove, save }) => {
-
-  let clearClicked = () => { remove(item) }
-  let addClicked = () => { save(item) }
+  let clearClicked = () => {
+    remove(item);
+  };
+  let addClicked = () => {
+    save(item);
+  };
   return (
-    <Paper className="classes.paper" style={{ width: '100%', marginTop: '10px', marginBottom: '10px', marginLeft: '1px', position: 'relative', zIndex: 1 }} >
-      <Grid container wrap="nowrap" style={{ alignItems: 'center', padding: '10px' }} >
+    <Paper
+      className="classes.paper"
+      style={{
+        width: '100%',
+        marginTop: '10px',
+        marginBottom: '10px',
+        marginLeft: '1px',
+        position: 'relative',
+        zIndex: 1,
+      }}
+    >
+      <Grid container wrap="nowrap" style={{ alignItems: 'center', padding: '10px' }}>
         <Grid item xs>
           <Typography>{item}</Typography>
         </Grid>
@@ -141,17 +152,16 @@ let IngredientComponent = ({ item, remove, save }) => {
         <AddRoundedIcon onClick={addClicked} />
       </Grid>
     </Paper>
-  )
-}
+  );
+};
 
-
-export default function GitHubLabel() {
+export default function SecondSection({ setIngredients }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [value, setValue] = React.useState([]);
   const [saved, setSaved] = React.useState([]);
   const [pendingValue, setPendingValue] = React.useState([]);
-
+  setIngredients(value);
 
   const handleClick = event => {
     setPendingValue(value);
@@ -177,7 +187,6 @@ export default function GitHubLabel() {
     setSaved(arr);
   }
 
-
   const open = Boolean(anchorEl);
   const id = open ? 'github-label' : undefined;
 
@@ -191,7 +200,6 @@ export default function GitHubLabel() {
           onClick={handleClick}
         >
           <span>Select Ingredients</span>
-
         </ButtonBase>
         {value.map(item => (
           <IngredientComponent key={item} item={item} remove={remove} save={save} />
@@ -228,9 +236,7 @@ export default function GitHubLabel() {
                 style={{ visibility: selected ? 'visible' : 'hidden' }}
               />
               <span className={classes.color} style={{ backgroundColor: option.color }} />
-              <div className={classes.text}>
-                {option}
-              </div>
+              <div className={classes.text}>{option}</div>
               <CloseIcon
                 className={classes.close}
                 style={{ visibility: selected ? 'visible' : 'hidden' }}

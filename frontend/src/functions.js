@@ -3,8 +3,8 @@ const fetch = require('node-fetch');
 let apiKey = '699883d42efa4b0297fb8daccb5430aa';
 
 
-async function getRecipeByIngredients(ingredentsArray) {
-  ingredientsString = ingredentsArray.join(',');
+async function getRecipeByIngredients(ingredentsArray, setRecipes) {
+  let ingredientsString = ingredentsArray.join(',');
   let recipesList = await (await fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${ingredientsString}&number=10`)).json();
   let recipes = recipesList.map(recipe => {
     return {
@@ -16,7 +16,7 @@ async function getRecipeByIngredients(ingredentsArray) {
       id: recipe.id,
     }
   });
-  return recipes;
+  setRecipes(recipes);
 }
 
 async function optimizeIngredients(recipe) {
@@ -161,3 +161,5 @@ async function getRecipeInstructions(recipeId) {
   return instructions;
 }
 
+
+export { getRecipeByIngredients, getRecipeInstructions, optimizeIngredients };
