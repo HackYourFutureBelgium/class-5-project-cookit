@@ -1,10 +1,7 @@
 const fetch = require('node-fetch');
 
 let apiKey = '699883d42efa4b0297fb8daccb5430aa';
-let ingredents = ['pasta', 'basil', 'milk']; // user input
 
-let pantryItems = 'water, salt, flour';  // will be default selected
-let defaultSelectedItems = 'onion, tomato, oil'; // will be default selected
 
 async function getRecipeByIngredients(ingredentsArray) {
   ingredientsString = ingredentsArray.join(',');
@@ -22,7 +19,7 @@ async function getRecipeByIngredients(ingredentsArray) {
   return recipes;
 }
 
-async function optimizeRecipe(recipe) {
+async function optimizeIngredients(recipe) {
   let missedIngredientsArray = recipe.missedIngredients.map(item => item.name);
   let unusedIngredientsArray = recipe.unusedIngredients.map(item => item.name);
   let substitutesList = await Promise.all(await missedIngredientsArray.map(async (item) => await getSubstitute(item)));
@@ -35,7 +32,6 @@ async function optimizeRecipe(recipe) {
       for (item of missedItem.substitutes) {
         let includes = 0;
         for (let i of item.substitute.name) {
-          console.log(i)
           includes = unusedIngredientsArray.includes(i);
         }
 
@@ -63,6 +59,7 @@ async function optimizeRecipe(recipe) {
       type: 'missed',
     }
   })
+
   let usedIngredients = recipe.usedIngredients.map(item => {
     return {
       amount: item.amount,
@@ -74,29 +71,41 @@ async function optimizeRecipe(recipe) {
     }
   })
 
+  let removedAndReplaced = {};
   for (let item of replacable) {
-    let index = missedIngredientsArray.indexOf(item.name);
+    if (item !== 'no substitute') {
 
-    let sourceUnit = missedIngredients[index].unit;
-    let sourceAmount = missedIngredients[index].amount;
+      let index = missedIngredientsArray.indexOf(item.name);
+      let sourceUnit = missedIngredients[index].unit;
+      let sourceAmount = missedIngredients[index].amount;
 
-    let targetConversion = await (await fetch(`https://api.spoonacular.com/recipes/convert?apiKey=${apiKey}ingredientName=${item.name}&sourceAmount=${sourceAmount}&sourceUnit=${sourceUnit}&targetUnit=${item.baseUnit}`)).json();
-    let mult = targetConversion.targetAmount;
+      console.log(sourceUnit, sourceAmount, item.baseUnit);
 
-    missedIngredients[index].name = item.substitute.name;
-    missedIngredients[index].unit = item.substitute.unit;
-    missedIngredients[index].amount;
+      let targetConversion = await (await fetch(`https://api.spoonacular.com/recipes/convert?apiKey=${apiKey}ingredientName=${item.name}&sourceAmount=${sourceAmount}&sourceUnit=${sourceUnit}&targetUnit=${item.baseUnit}`)).json();
+      let mult = sourceAmount;
+      if (targetConversion.targetAmount) {
+        mult = targetConversion.targetAmount
+      }
 
+      let replacement = {};
+      replacement.name = item.substitute.name.join(',');
+      replacement.unit = item.substitute.unit.join(',');
+      replacement.amount = Number(mult) * Number(item.substitute.amount) / Number(item.baseAmount);
+      replacement.image = '';
+      replacement.id = '';
+      replacement.type = 'used';
+      usedIngredients.push(replacement);
+      removedAndReplaced = { removed: missedIngredients.splice(index, 1), replaced: replacement.name };
+    }
   }
-  return replacable;
+  return { used: usedIngredients, missed: missedIngredients, removed: removedAndReplaced.removed, replaced: removedAndReplaced.replaced };
 }
-
 /// WORKS
 async function getSubstitute(missedIngredient) {
   let data = await (await fetch(`https://api.spoonacular.com/food/ingredients/substitutes?apiKey=${apiKey}&ingredientName=${missedIngredient}`)).json();
   if (data.status === "success") {
     let obj = {
-      name: data.ingredient,
+      name: missedIngredient,
       substitutes: analyzeSubstitutesList(data.substitutes),
     }
     return obj;
@@ -143,11 +152,6 @@ function analyzeSubstitutesList(substitutesList) {
   }
 }
 
-
-
-
-
-
 /// WORKS P4
 async function getRecipeInstructions(recipeId) {
 
@@ -156,31 +160,4 @@ async function getRecipeInstructions(recipeId) {
 
   return instructions;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//getSubstitute('butter').then(data => console.log(data));
-//getRecipeInstructions(324694).then(data => console.log(data));
-//getRecipeByIngredients(ingredents);
-
-
-
-
-
-
-
-
-
-
-
 
