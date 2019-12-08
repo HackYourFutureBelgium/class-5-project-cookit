@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import './EpicMenu.css';
+import '../EpicMenu.css';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import searchIcon from './search-icon.png';
+import searchIcon from '../search-icon.png';
 
 firebase.initializeApp({
-  apiKey: 'AIzaSyCHCw0nHjUwds38zc9k8rPdkF4UPVzl4DU',
-  authDomain: 'hyf-cookit.firebaseapp.com',
+  apiKey: 'AIzaSyDKKpTxO6tDfpZ-twIm9UeKn1jA1u5WyWQ',
+  authDomain: 'cookit-39cc5.firebaseapp.com',
 });
 
 class EpicMenu extends Component {

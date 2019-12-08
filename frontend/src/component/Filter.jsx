@@ -45,34 +45,33 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ExpansionPart = () => {
+const Filter = () => {
   const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleChange = panel => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
   return (
-    <div className={classes.root}>
-      <ExpansionPanel defaultExpanded>
+    <div className={classes.root} className="mb-5">
+      <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1c-content"
-          id="panel1c-header"
+          aria-controls="panel1bh-content"
+          id="panel1bh-header"
         >
-          <div className={classes.column}>
-            <Typography className={classes.heading}>Select Something</Typography>
-          </div>
+          <Typography className={classes.heading}>Filter</Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.details}>
-          <div className={classes.column} />
+        <ExpansionPanelDetails>
+          <Typography>
+            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
+            maximus est, id dignissim quam.
+          </Typography>
         </ExpansionPanelDetails>
-        <Divider />
-        <ExpansionPanelActions>
-          <Button size="small">Cancel</Button>
-          <Button size="small" color="primary">
-            Save
-          </Button>
-        </ExpansionPanelActions>
       </ExpansionPanel>
     </div>
   );
 };
 
-export default ExpansionPart;
+export default Filter;
