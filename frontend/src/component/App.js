@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import EpicMenu from './EpicMenu';
-import './App.css'
-import logo from './cookit.png';
+import FirstSection from './FirstSection';
+import '../App.css'
+import logo from '../cookit.png';
+import SecondSection from './SecondSection';
+import ThirdSection from './ThirdSection';
+import Main from './Main';
+
+
 
 
 class App extends Component {
@@ -16,9 +22,13 @@ class App extends Component {
 
     return (
 
-      <div className="container center">
+      <>
         <EpicMenu links={links} logo={logo} />
-      </div>
+        <FirstSection />
+        <Main />
+
+
+      </>
 
     );
   }
