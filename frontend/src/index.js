@@ -20,7 +20,7 @@ const store=createStore(
     applyMiddleware(thunk.withExtraArgument({getFirebase,getFirestore})),
     reduxFirestore(firebaseConfig),
     reactReduxFirebase(firebaseConfig,{attachAuthIsReady:true,useFirestoreForProfile:true,
-        userProfile:'users'})
+        userProfile:'cookit-users'})
     
     )
   );

@@ -1,32 +1,69 @@
-import React, {Component} from "react"
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import SearchPart from './components/SearchPart';
+import Recipes from './components/Recipes';
+import Filter from './components/Filter';
+import 'antd/dist/antd.css';
+import Button from '@material-ui/core/Button';
+import { Icon } from 'antd';
+import { getRecipeByIngredients, getRecipeInstructions, optimizeIngredients } from './functions.js';
+import Container from '@material-ui/core/Container';
 
-import MainBody from './MainBody'
-import {BrowserRouter,Switch, Route} from 'react-router-dom'
-import Navbar from './components/layout/Navbar'
-import SignIn from './components/auth/SignIn'
-import SignUp from './components/auth/SignUp'
-import './Main.css'
+const Main = () => {
+  let [ingredients, setIngredients] = useState('');
+  let [recipes, setRecipes] = useState('');
 
-
-class Main extends Component {
-render() {
-    return (
-      <BrowserRouter>
-        <div className="Main">
-        <Navbar />
-        
-        <Switch>
-           
-
-            <Route path='/signin' component={SignIn} />
-            <Route path='/signup' component={SignUp} />
-        
-        </Switch>
-        </div>
-		<MainBody />
-      </BrowserRouter>
-    );
-  }
-}
-
+  return (
+    <>
+      <Container
+        style={{
+          height: '100vh',
+          marginTop: '20vh',
+          marginBottom: '20vh',
+        }}
+      >
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <Filter />
+          </Grid>
+          <Grid item xs={3} style={{}}>
+            <div
+              style={{
+                height: '50vh',
+                marginTop: '5vh',
+                marginBottom: '5vh',
+              }}
+            >
+              <SearchPart setIngredients={setIngredients} />
+            </div>
+          </Grid>
+          <div className="m-auto">
+            <Button
+              variant="contained"
+              color="primary"
+              href="#contained-buttons"
+              onClick={() => getRecipeByIngredients(ingredients, setRecipes)}
+            >
+              <Icon type="double-right" />
+            </Button>
+          </div>
+          <Grid item xs={8} style={{}}>
+            <div
+              style={{
+                height: '75vh',
+                marginTop: '5vh',
+                marginBottom: '5vh',
+                overflow: 'auto',
+              }}
+            >
+              <Recipes recipes={recipes} />
+            </div>
+          </Grid>
+        </Grid>
+      </Container>
+    </>
+  );
+};
 export default Main;

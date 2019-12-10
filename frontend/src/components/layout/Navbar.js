@@ -13,15 +13,12 @@ const Navbar=(props)=>{
     const links=auth.uid?<SignedInLinks profile={profile}/>:<SignedOutLinks/>
     return(
 
-        <nav className="nav-wrapper light-blue lighten-2">
+        <nav className="nav-wrapper white">
             
-            <div className="container">
-            <img src={logo} alt="Logo"  
-             style={{
-                
-                 backgroundColor: '#fff',
-
-             }}/>;
+            <div className="container2">
+           
+            <img className="brand-logo.center" src={logo} alt="Logo"  />
+           
             
                 {links}
             </div>

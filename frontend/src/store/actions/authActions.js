@@ -34,7 +34,7 @@ export const signUp=(userNew)=>{
             userNew.email,
             userNew.password
         ).then((res)=>{
-            return firestore.collection('users').doc(res.user.uid).set({
+            return firestore.collection('cookit-users').doc(res.user.uid).set({
                 firstName:userNew.firstName,
                 lastName:userNew.lastName,
                 monogram:userNew.firstName[0]+userNew.lastName[0]
