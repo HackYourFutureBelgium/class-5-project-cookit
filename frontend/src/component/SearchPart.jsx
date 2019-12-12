@@ -1,17 +1,13 @@
 import React from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import Popper from '@material-ui/core/Popper';
+import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 import DoneIcon from '@material-ui/icons/Done';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import ButtonBase from '@material-ui/core/ButtonBase';
 import InputBase from '@material-ui/core/InputBase';
 import ingredients from '../ingredients';
-import AddRoundedIcon from '@material-ui/icons/AddRounded';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import ClearRoundedIcon from '@material-ui/icons/ClearRounded';
+import { maxHeight } from '@material-ui/system';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -86,7 +82,9 @@ const useStyles = makeStyles(theme => ({
     margin: 0,
     color: '#586069',
     fontSize: 13,
+    height: '65vh',  ////
   },
+  //ingredient options
   option: {
     minHeight: 'auto',
     alignItems: 'flex-start',
@@ -97,6 +95,9 @@ const useStyles = makeStyles(theme => ({
     '&[data-focus="true"]': {
       backgroundColor: theme.palette.action.hover,
     },
+  },
+  listbox: {
+    maxHeight: 'none',
   },
   popperDisablePortal: {
     position: 'relative',
@@ -125,35 +126,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-let IngredientComponent = ({ item, remove, save }) => {
-  let clearClicked = () => {
-    remove(item);
-  };
-  let addClicked = () => {
-    save(item);
-  };
-  return (
-    <Paper
-      className="classes.paper"
-      style={{
-        width: '100%',
-        marginTop: '10px',
-        marginBottom: '10px',
-        marginLeft: '1px',
-        position: 'relative',
-        zIndex: 1,
-      }}
-    >
-      <Grid container wrap="nowrap" style={{ alignItems: 'center', padding: '10px' }}>
-        <Grid item xs>
-          <Typography>{item}</Typography>
-        </Grid>
-        <ClearRoundedIcon onClick={clearClicked} />
-        <AddRoundedIcon onClick={addClicked} />
-      </Grid>
-    </Paper>
-  );
-};
 
 export default function SearchPart({ setIngredients }) {
   const classes = useStyles();
@@ -161,12 +133,8 @@ export default function SearchPart({ setIngredients }) {
   const [value, setValue] = React.useState([]);
   const [saved, setSaved] = React.useState([]);
   const [pendingValue, setPendingValue] = React.useState([]);
-  setIngredients(value);
 
-  const handleClick = event => {
-    setPendingValue(value);
-    setAnchorEl(event.currentTarget);
-  };
+  setIngredients(value);
 
   const handleClose = () => {
     setValue(pendingValue);
@@ -176,94 +144,73 @@ export default function SearchPart({ setIngredients }) {
     setAnchorEl(null);
   };
 
-  function remove(item) {
-    let arr = value.filter(i => i !== item);
-    setValue(arr);
-  }
-
-  function save(item) {
-    let arr = saved;
-    arr.push(item);
-    setSaved(arr);
-  }
-
-  const open = Boolean(anchorEl);
-  const id = open ? 'github-label' : undefined;
-
   return (
-    <React.Fragment>
-      <div className={classes.root}>
-        <ButtonBase
-          disableRipple
-          className={classes.button}
-          aria-describedby={id}
-          onClick={handleClick}
-        >
-          <span>Select Ingredients</span>
-        </ButtonBase>
-        {value.map(item => (
-          <IngredientComponent key={item} item={item} remove={remove} save={save} />
-        ))}
-      </div>
-      <Popper
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        placement="bottom-start"
-        className={classes.popper}
-      >
-        <Autocomplete
-          open
-          onClose={handleClose}
-          multiple
-          classes={{
-            paper: classes.paper,
-            option: classes.option,
-            popperDisablePortal: classes.popperDisablePortal,
-          }}
-          value={pendingValue}
-          onChange={(event, newValue) => {
-            setPendingValue(newValue);
-          }}
-          disableCloseOnSelect
-          disablePortal
-          renderTags={() => null}
-          noOptionsText="No labels"
-          renderOption={(option, { selected }) => (
-            <React.Fragment>
-              <DoneIcon
-                className={classes.iconSelected}
-                style={{ visibility: selected ? 'visible' : 'hidden' }}
-              />
-              <span className={classes.color} style={{ backgroundColor: option.color }} />
-              <div className={classes.text}>{option}</div>
-              <CloseIcon
-                className={classes.close}
-                style={{ visibility: selected ? 'visible' : 'hidden' }}
-              />
-            </React.Fragment>
-          )}
-          options={[...labels].sort((a, b) => {
-            // Display the selected labels first.
-            let ai = value.indexOf(a);
-            ai = ai === -1 ? value.length + labels.indexOf(a) : ai;
-            let bi = value.indexOf(b);
-            bi = bi === -1 ? value.length + labels.indexOf(b) : bi;
-            return ai - bi;
-          })}
-          getOptionLabel={option => option}
-          renderInput={params => (
-            <InputBase
-              ref={params.InputProps.ref}
-              inputProps={params.inputProps}
-              autoFocus
-              className={classes.inputBase}
+    <div className='select_ingredients'>
+      <Autocomplete
+        open
+        onClose={handleClose}
+        multiple
+        classes={{
+          paper: classes.paper,
+          option: classes.option,
+          popperDisablePortal: classes.popperDisablePortal,
+          listbox: classes.listbox,
+        }}
+        value={pendingValue}
+        onChange={(event, newValue) => {
+          setPendingValue(newValue);
+          setValue(newValue);
+        }}
+        disableCloseOnSelect
+        disablePortal
+        renderTags={() => null}
+        noOptionsText="No labels"
+        renderOption={(option, { selected }) => (
+          <React.Fragment>
+            <DoneIcon
+              className={classes.iconSelected}
+              style={{ visibility: selected ? 'visible' : 'hidden' }}
             />
-          )}
-        />
-      </Popper>
-    </React.Fragment>
+            <span className={classes.color} style={{ backgroundColor: option.color }} />
+            <div className={classes.text}>{option}</div>
+            <CloseIcon
+              className={classes.close}
+              style={{ visibility: selected ? 'visible' : 'hidden' }}
+            />
+          </React.Fragment>
+        )}
+        options={[...labels].sort((a, b) => {
+          // Display the selected labels first.
+          let ai = value.indexOf(a);
+          ai = ai === -1 ? value.length + labels.indexOf(a) : ai;
+          let bi = value.indexOf(b);
+          bi = bi === -1 ? value.length + labels.indexOf(b) : bi;
+          return ai - bi;
+        })}
+        getOptionLabel={option => option}
+        renderInput={params => (
+          <InputBase
+            ref={params.InputProps.ref}
+            inputProps={params.inputProps}
+            autoFocus
+            className={classes.inputBase}
+          />
+        )}
+      />
+      <Button
+        variant="contained"
+        onClick={() => { setSaved(value) }}
+        style={{ marginTop: '5px' }}
+      >
+        Save List
+      </Button>
+      {console.log('SAVED :', saved)}
+    </div>
   );
 }
 
 const labels = ingredients;
+
+
+
+

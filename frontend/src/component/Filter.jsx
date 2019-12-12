@@ -12,7 +12,7 @@ import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
+    width: '100vw',
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -55,7 +55,7 @@ const Filter = () => {
 
   return (
     <div className={classes.root} className="mb-5">
-      <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+      <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')} style={{ width: '100%' }}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"

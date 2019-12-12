@@ -1,36 +1,26 @@
-import React, { Component } from 'react';
-import EpicMenu from './EpicMenu';
+import React, { useState, useEffect } from 'react';
 import FirstSection from './FirstSection';
-import '../App.css'
-import logo from '../cookit.png';
+import MainMenu from "./MainMenu"
 import Main from './Main';
 import RecipeDetails from './RecipeDetails';
+import UserSavedData from './UserSavedData'
+import '../App.css'
 
 
+let App = () => {
+  let [recipeId, setRecipeId] = useState('');
+  let [recipeIngredients, setRecipeIngredients] = useState('');
 
-
-class App extends Component {
-  render() {
-    const links = [
-      { label: 'Home', link: '#home', active: true },
-      { label: 'About', link: '#about' },
-      { label: 'Cookit', link: '#cookit' },
-      { label: 'Contact Us', link: '#contact-us' },
-
-    ];
-
-    return (
-
-      <>
-        <EpicMenu links={links} logo={logo} />
-        <FirstSection />
-        <Main />
-        <RecipeDetails/>
-
-      </>
-
-    );
-  }
+  return (
+    <>
+      <MainMenu />
+      <FirstSection />
+      <Main setRecipeId={setRecipeId} setRecipeIngredients={setRecipeIngredients} />
+      <RecipeDetails recipeId={recipeId} recipeIngredients={recipeIngredients} />
+      <UserSavedData />
+    </>
+  );
 }
+
 
 export default App;

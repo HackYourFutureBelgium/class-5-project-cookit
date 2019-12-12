@@ -11,59 +11,29 @@ import { Icon } from 'antd';
 import { getRecipeByIngredients, getRecipeInstructions, optimizeIngredients } from '../functions';
 import Container from '@material-ui/core/Container';
 
-const Main = () => {
+const Main = ({ setRecipeId, setRecipeIngredients, setRecipePic }) => {
   let [ingredients, setIngredients] = useState('');
   let [recipes, setRecipes] = useState('');
 
+
   return (
-    <>
-      <Container
-        style={{
-          height: '100vh',
-          marginTop: '20vh',
-          marginBottom: '20vh',
-        }}
-      >
-        <Grid container spacing={1}>
-          <Grid item xs={12}>
-            <Filter />
-          </Grid>
-          <Grid item xs={3} style={{}}>
-            <div
-              style={{
-                height: '50vh',
-                marginTop: '5vh',
-                marginBottom: '5vh',
-              }}
-            >
-              <SearchPart setIngredients={setIngredients} />
-            </div>
-          </Grid>
-          <div className="m-auto">
-            <Button
-              variant="contained"
-              color="primary"
-              href="#contained-buttons"
-              onClick={() => getRecipeByIngredients(ingredients, setRecipes)}
-            >
-              <Icon type="double-right" />
-            </Button>
-          </div>
-          <Grid item xs={8} style={{}}>
-            <div
-              style={{
-                height: '75vh',
-                marginTop: '5vh',
-                marginBottom: '5vh',
-                overflow: 'auto',
-              }}
-            >
-              <Recipes recipes={recipes} />
-            </div>
-          </Grid>
-        </Grid>
-      </Container>
-    </>
+    <Grid container spacing={1} className="w-100 m-0" style={{ height: '100vh', width: '100%' }}>
+      <Grid item xs={12} style={{ height: '10vh' }}>
+        <Filter />
+      </Grid>
+      <Grid item xs={4} style={{ height: '90vh' }}>
+        <SearchPart setIngredients={setIngredients} />
+      </Grid>
+      <Grid item xs={1} style={{ height: '90vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Button variant="contained" color="primary" href="#contained-buttons" onClick={() => getRecipeByIngredients(ingredients, setRecipes)}>
+          <Icon type="double-right" />
+        </Button>
+      </Grid>
+      <Grid item xs={7} style={{ height: '90vh' }}>
+        <Recipes recipes={recipes} setRecipeId={setRecipeId} setRecipeIngredients={setRecipeIngredients} />
+      </Grid>
+    </Grid>
+
   );
 };
 export default Main;

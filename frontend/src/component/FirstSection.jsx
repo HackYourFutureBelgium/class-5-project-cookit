@@ -12,9 +12,9 @@ const FirstSection = () => {
         style={{
           backgroundImage: 'url(' + Image + ')',
           backgroundSize: 'cover',
-          height: '75vh',
+          height: '90vh',
           position: 'relative',
-          maxWidth:"none"
+          maxWidth: "none"
         }}
       >
         <div style={{ position: 'absolute', right: 90, bottom: 80 }}>

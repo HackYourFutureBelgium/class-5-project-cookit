@@ -6,16 +6,20 @@ let apiKey = '699883d42efa4b0297fb8daccb5430aa';
 async function getRecipeByIngredients(ingredentsArray, setRecipes) {
   let ingredientsString = ingredentsArray.join(',');
   let recipesList = await (await fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${ingredientsString}&number=10`)).json();
-  let recipes = recipesList.map(recipe => {
-    return {
-      image: recipe.image,
-      title: recipe.title,
-      missedIngredients: recipe.missedIngredients,
-      usedIngredients: recipe.usedIngredients,
-      unusedIngredients: recipe.unusedIngredients,
-      id: recipe.id,
-    }
-  });
+  let recipes = [];
+  if (recipesList.code !== 402) {
+    console.log(recipesList);
+    recipes = recipesList.map(recipe => {
+      return {
+        image: recipe.image,
+        title: recipe.title,
+        missedIngredients: recipe.missedIngredients,
+        usedIngredients: recipe.usedIngredients,
+        unusedIngredients: recipe.unusedIngredients,
+        id: recipe.id,
+      }
+    });
+  }
   setRecipes(recipes);
 }
 
@@ -156,7 +160,7 @@ function analyzeSubstitutesList(substitutesList) {
 async function getRecipeInstructions(recipeId, setInstructions) {
 
   let data = await (await fetch(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKey}`)).json();
-  let instructions = data[0].steps.map(item => item.step)
+  let instructions = data[0] ? data[0].steps.map(item => item.step) : ['NO INSTRUCTION FOUND']
   setInstructions(instructions);
 }
 

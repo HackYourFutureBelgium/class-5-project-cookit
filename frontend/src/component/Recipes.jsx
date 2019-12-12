@@ -7,37 +7,37 @@ const { Meta } = Card;
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Image from '../recipe.jpg';
 
-const Recipes = ({ recipes }) => {
+const Recipes = ({ recipes, setRecipeId, setRecipeIngredients }) => {
   return (
     <>
       <CssBaseline />
       <Container
         style={{
           padding: 'auto',
+          height: '100%'
         }}
       >
-        <Grid container spacing={6} style={{}}>
-          {recipes ? (
-            recipes.map(recipe => {
-              return (
-                <Grid item xs={12} sm={6} md={4} lg={4}>
-                  <Card
-                    style={{ width: 215 }}
-                    cover={<img alt="example" src={recipe.image} />}
-                    actions={[<Icon type="heart" />, <Icon type="double-right" />]}
-                  >
-                    <Meta title={recipe.title} />
-                    <Badge variant="danger">{recipe.missedIngredients.length}</Badge>
-                    <Badge variant="success">{recipe.usedIngredients.length}</Badge>
-                  </Card>
-                </Grid>
-              );
-            })
-          ) : (
-            <div>PLEASE TYPE IN INGREDIENTS</div>
-          )}
+        <Grid container spacing={6} style={{ height: '100%', overflow: 'scroll', paddingTop: '0', marginTop: '0' }} >
+
+          {recipes ? recipes.map((recipe, key) => {
+            return (
+              <Grid item xs={12} sm={6} md={4} lg={4} key={key}>
+                <Card
+                  style={{ width: 215 }}
+                  cover={<img alt="example" src={recipe.image} />}
+                  actions={[<Icon type="heart" />, <Icon type="double-right" />]}
+                  onClick={() => { setRecipeId(recipe.id); setRecipeIngredients(recipe.missedIngredients) }}  //move to the recipeDescription component
+                >
+                  <Meta title={recipe.title} />
+                  <Badge variant="danger">{recipe.missedIngredients.length}</Badge>
+                  <Badge variant="success">{recipe.usedIngredients.length}</Badge>
+                </Card>
+              </Grid>
+            )
+          }) : <div>PLEASE TYPE IN INGREDIENTS</div>
+          }
+
         </Grid>
       </Container>
     </>

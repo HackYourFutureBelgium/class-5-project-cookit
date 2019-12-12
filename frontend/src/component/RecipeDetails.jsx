@@ -1,49 +1,91 @@
-import React from 'react';
-import Box from '@material-ui/core/Box';
-import { sizing } from '@material-ui/system';
-import { borders } from '@material-ui/system';
-import { shadows } from '@material-ui/system';
-import { typography } from '@material-ui/system';
-import { display } from '@material-ui/system';
-import { spacing } from '@material-ui/system';
+import React, { useState, useEffect } from 'react';
+import { getRecipeInstructions } from '../functions'
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import Image from '../recipe.jpg';
 
-const RecipeDetails = () => {
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    height: '100vh',
+    padding: '2vw',
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    height: '100%',
+    opacity: 0.9,
+  },
+}));
+
+
+let Ingredients = ({ ingredients }) => {
   return (
-  <div style={{ 
-  height: '100vh',
-  marginTop: '20vh',
-  marginBottom: '20vh', }}>
-      <Box 
-      borderRadius="borderRadius"
-      boxShadow={3}
-      border={1} 
-      borderColor="grey.500"
-      display="inline-block"
-      component="div"
-      p={2}  
-      m={2}
-      textAlign="center"
-      width="90vh" 
-      height="50vh">
-        {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}
-      </Box>
-      <Box  
-      borderRadius="borderRadius"     
-      boxShadow={3}
-      border={1} 
-      borderColor="grey.500"
-      display="inline-block"
-      component="div" 
-      p={2}  
-      m={2}
-      textAlign="center"
-      width="90vh"
-      height="50vh">
-      {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}
-      </Box>
-  </div>
-
-);    
+    <div>
+      <h3>INGREDIENTS</h3>
+      {
+        ingredients ? ingredients.map((item, key) => {
+          return (<p id={item.name} key={key}>
+            <span className='amount'>{item.amount} </span>
+            <span className='unit'>{item.unit} </span>
+            <span className='name'>{item.name} </span>
+          </p>)
+        }) : <div>NO INGREDIENTS YET</div>
+      }
+    </div>)
 }
 
-export default RecipeDetails;
+let Instructions = ({ instructions }) => {
+  return (
+    <div>
+      <h3>INSTRUCTIONS</h3>
+      <div style={{ textAlign: 'left' }}>
+        {instructions ? instructions.map((item, key) =>
+          <p key={key} >- {item}</p>
+        ) : <div>NO INSTRUCTIONS YET</div>}
+      </div>
+    </div>)
+}
+
+
+let RecipeDescription = ({ recipeId, recipeIngredients }) => {
+  let [instructions, setInstructions] = useState('');
+
+  useEffect(() => {
+    if (recipeId) {
+      getRecipeInstructions(recipeId, setInstructions);
+      console.log(recipeId)
+    }
+  }, [recipeId])
+
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root} style={{
+      backgroundImage: 'url(' + Image + ')',
+      backgroundSize: 'cover',
+      display: recipeId ? 'block' : 'none',
+    }}>
+      <Grid container style={{ height: '100%' }}>
+        <Grid item xs={4} style={{ paddingRight: '2vw' }}>
+          <Paper className={classes.paper}>
+            <Ingredients ingredients={recipeIngredients} />
+          </Paper>
+        </Grid>
+        <Grid item xs={8}>
+          <Paper className={classes.paper}>
+            <Instructions instructions={instructions} />
+          </Paper>
+        </Grid>
+      </Grid>
+    </div>
+
+  )
+}
+
+export default RecipeDescription;
+
