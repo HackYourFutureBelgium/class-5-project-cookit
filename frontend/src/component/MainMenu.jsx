@@ -1,10 +1,8 @@
-import React, { Component } from "react"
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import Navbar from './layout/Navbar'
-import SignIn from './auth/SignIn'
-import SignUp from './auth/SignUp'
-import '../Main.css'
-
+import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Navbar from './layout/Navbar';
+import SignIn from './auth/SignIn';
+import SignUp from './auth/SignUp';
 
 class MainMenu extends Component {
   render() {
@@ -14,12 +12,10 @@ class MainMenu extends Component {
           <Navbar />
 
           <Switch>
-            <Route path='/signin' component={SignIn} />
-            <Route path='/signup' component={SignUp} />
-
+            <Route path="/signin" component={SignIn} />
+            <Route path="/signup" component={SignUp} />
           </Switch>
         </div>
-
       </BrowserRouter>
     );
   }
