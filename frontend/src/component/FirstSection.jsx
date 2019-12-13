@@ -14,7 +14,7 @@ const FirstSection = () => {
           backgroundSize: 'cover',
           height: '90vh',
           position: 'relative',
-          maxWidth: "none"
+          maxWidth: 'none',
         }}
       >
         <div style={{ position: 'absolute', right: 90, bottom: 80 }}>
@@ -32,7 +32,7 @@ const FirstSection = () => {
               bottom: -55,
             }}
           >
-            Link
+            <a href="#search-recipes">Link</a>
           </Button>
         </div>
       </Container>

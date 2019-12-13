@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { getRecipeInstructions } from '../functions'
+import { getRecipeInstructions } from '../functions';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Image from '../recipe.jpg';
-
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,35 +21,43 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
 let Ingredients = ({ ingredients }) => {
   return (
     <div>
       <h3>INGREDIENTS</h3>
-      {
-        ingredients ? ingredients.map((item, key) => {
-          return (<p id={item.name} key={key}>
-            <span className='amount'>{item.amount} </span>
-            <span className='unit'>{item.unit} </span>
-            <span className='name'>{item.name} </span>
-          </p>)
-        }) : <div>NO INGREDIENTS YET</div>
-      }
-    </div>)
-}
+      {ingredients ? (
+        ingredients.map((item, key) => {
+          return (
+            <p id={item.name} key={key}>
+              <span className="amount">{item.amount} </span>
+              <span className="unit">{item.unit} </span>
+              <span className="name">{item.name} </span>
+            </p>
+          );
+        })
+      ) : (
+        <div>NO INGREDIENTS YET</div>
+      )}
+    </div>
+  );
+};
 
 let Instructions = ({ instructions }) => {
   return (
     <div>
-      <h3>INSTRUCTIONS</h3>
+      <h3>
+        <a name="get-instructions">INSTRUCTIONS</a>
+      </h3>
       <div style={{ textAlign: 'left' }}>
-        {instructions ? instructions.map((item, key) =>
-          <p key={key} >- {item}</p>
-        ) : <div>NO INSTRUCTIONS YET</div>}
+        {instructions ? (
+          instructions.map((item, key) => <p key={key}>- {item}</p>)
+        ) : (
+          <div>NO INSTRUCTIONS YET</div>
+        )}
       </div>
-    </div>)
-}
-
+    </div>
+  );
+};
 
 let RecipeDescription = ({ recipeId, recipeIngredients }) => {
   let [instructions, setInstructions] = useState('');
@@ -58,18 +65,21 @@ let RecipeDescription = ({ recipeId, recipeIngredients }) => {
   useEffect(() => {
     if (recipeId) {
       getRecipeInstructions(recipeId, setInstructions);
-      console.log(recipeId)
+      console.log(recipeId);
     }
-  }, [recipeId])
+  }, [recipeId]);
 
   const classes = useStyles();
 
   return (
-    <div className={classes.root} style={{
-      backgroundImage: 'url(' + Image + ')',
-      backgroundSize: 'cover',
-      display: recipeId ? 'block' : 'none',
-    }}>
+    <div
+      className={classes.root}
+      style={{
+        backgroundImage: 'url(' + Image + ')',
+        backgroundSize: 'cover',
+        display: recipeId ? 'block' : 'none',
+      }}
+    >
       <Grid container style={{ height: '100%' }}>
         <Grid item xs={4} style={{ paddingRight: '2vw' }}>
           <Paper className={classes.paper}>
@@ -83,9 +93,7 @@ let RecipeDescription = ({ recipeId, recipeIngredients }) => {
         </Grid>
       </Grid>
     </div>
-
-  )
-}
+  );
+};
 
 export default RecipeDescription;
-
