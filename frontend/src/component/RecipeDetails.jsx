@@ -25,19 +25,34 @@ let Ingredients = ({ ingredients }) => {
   return (
     <div>
       <h3>INGREDIENTS</h3>
-      {ingredients ? (
-        ingredients.map((item, key) => {
-          return (
-            <p id={item.name} key={key}>
-              <span className="amount">{item.amount} </span>
-              <span className="unit">{item.unit} </span>
-              <span className="name">{item.name} </span>
-            </p>
-          );
-        })
-      ) : (
-          <div>NO INGREDIENTS YET</div>
-        )}
+      <div style={{ overflow: 'scroll', height: '70vh' }}>
+        {ingredients[0] ? (
+          ingredients[0].map((item, key) => {
+            return (
+              <p id={item.name} key={key}>
+                <span className="amount">{item.amount} </span>
+                <span className="unit">{item.unit} </span>
+                <span className="name">{item.name} </span>
+              </p>
+            );
+          })
+        ) : (
+            <div>NO USED INGREDIENTS YET</div>
+          )}
+        {ingredients[1] ? (
+          ingredients[1].map((item, key) => {
+            return (
+              <p id={item.name} key={key}>
+                <span className="amount">{item.amount} </span>
+                <span className="unit">{item.unit} </span>
+                <span className="name">{item.name} </span>
+              </p>
+            );
+          })
+        ) : (
+            <div>NO MISSED INGREDIENTS YET</div>
+          )}
+      </div>
     </div>
   );
 };
@@ -48,7 +63,7 @@ let Instructions = ({ instructions }) => {
       <h3>
         <a name="get-instructions">INSTRUCTIONS</a>
       </h3>
-      <div style={{ textAlign: 'left' }}>
+      <div style={{ textAlign: 'left', overflow: 'scroll', height: '70vh' }}>
         {instructions ? (
           instructions.map((item, key) => <p key={key}>- {item}</p>)
         ) : (
@@ -77,7 +92,7 @@ let RecipeDescription = ({ recipeId, recipeIngredients }) => {
       style={{
         backgroundImage: 'url(' + Image + ')',
         backgroundSize: 'cover',
-        display: recipeId ? 'block' : 'none',
+        display: 'block' //recipeId ? 'block' : 'none',
       }}
     >
       <Grid container style={{ height: '100%' }}>

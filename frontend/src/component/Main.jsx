@@ -11,7 +11,7 @@ import { Icon } from 'antd';
 import { getRecipeByIngredients } from '../functions';
 import Container from '@material-ui/core/Container';
 
-const Main = ({ setRecipeId, setRecipeIngredients, setRecipePic }) => {
+const Main = ({ setRecipeId, setRecipeIngredients }) => {
   let [ingredients, setIngredients] = useState('');
   let [recipes, setRecipes] = useState('');
 

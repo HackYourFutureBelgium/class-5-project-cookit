@@ -10,15 +10,15 @@ async function getRecipeByIngredients(ingredentsArray, setRecipes) {
   let recipes = [];
   if (recipesList.code !== 402) {
 
-    recipes = recipesList.map(async (recipe) => {
+    recipes = recipesList.map(recipe => {
 
-      let substitutesListArray = await Promise.all(recipe.missedIngredients.map(async (item) => await getSubstitute(item.name, item.unitShort, item.amount)));
+      //let substitutesListArray = await Promise.all(recipe.missedIngredients.map(async (item) => await getSubstitute(item.name, item.unitShort, item.amount)));
       return {
         image: recipe.image,
         title: recipe.title,
         missedIngredients: recipe.missedIngredients,
         usedIngredients: recipe.usedIngredients,
-        substitutes: substitutesListArray,
+        //substitutes: substitutesListArray,
         id: recipe.id,
       }
     });
