@@ -1,7 +1,8 @@
 const fetch = require('node-fetch');
 const convert = require('convert-units');
 
-let apiKey = '699883d42efa4b0297fb8daccb5430aa';
+let apiKey = 'b4de2c0484f94d2d9480cb6f2cc6fe9a'; //'699883d42efa4b0297fb8daccb5430aa';
+
 
 
 async function getRecipeByIngredients(ingredentsArray, setRecipes) {
