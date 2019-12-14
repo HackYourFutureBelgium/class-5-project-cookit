@@ -8,7 +8,7 @@ import Filter from './Filter';
 import 'antd/dist/antd.css';
 import Button from '@material-ui/core/Button';
 import { Icon } from 'antd';
-import { getRecipeByIngredients, getRecipeInstructions, optimizeIngredients } from '../functions';
+import { getRecipeByIngredients } from '../functions';
 import Container from '@material-ui/core/Container';
 
 const Main = ({ setRecipeId, setRecipeIngredients, setRecipePic }) => {

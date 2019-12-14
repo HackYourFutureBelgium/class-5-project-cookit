@@ -36,8 +36,8 @@ let Ingredients = ({ ingredients }) => {
           );
         })
       ) : (
-        <div>NO INGREDIENTS YET</div>
-      )}
+          <div>NO INGREDIENTS YET</div>
+        )}
     </div>
   );
 };
@@ -52,8 +52,8 @@ let Instructions = ({ instructions }) => {
         {instructions ? (
           instructions.map((item, key) => <p key={key}>- {item}</p>)
         ) : (
-          <div>NO INSTRUCTIONS YET</div>
-        )}
+            <div>NO INSTRUCTIONS YET</div>
+          )}
       </div>
     </div>
   );
