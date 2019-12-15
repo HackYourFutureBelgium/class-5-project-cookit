@@ -6,7 +6,7 @@ module.exports = {
   extends: {
   "parser": "babel-eslint",
   "extends": ["airbnb"]
-}
+},
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
