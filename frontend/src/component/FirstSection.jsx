@@ -32,7 +32,7 @@ const FirstSection = () => {
               bottom: -55,
             }}
           >
-            <a href="#search-recipes">Link</a>
+            Search Recipes
           </Button>
         </div>
       </Container>

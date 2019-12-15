@@ -7,6 +7,8 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import InputBase from '@material-ui/core/InputBase';
 import ingredients from '../ingredients';
 import { maxHeight } from '@material-ui/system';
+import GlobalCss from './GlobalCss';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -82,7 +84,8 @@ const useStyles = makeStyles(theme => ({
     margin: 0,
     color: '#586069',
     fontSize: 13,
-    height: '65vh',  ////
+    height: '65vh',
+    maxHeight: 'none !important' ////
   },
   //ingredient options
   option: {
@@ -127,6 +130,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
+
+
 export default function SearchPart({ setIngredients }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -146,6 +151,7 @@ export default function SearchPart({ setIngredients }) {
 
   return (
     <div className='select_ingredients'>
+      <GlobalCss />
       <Autocomplete
         open
         onClose={handleClose}

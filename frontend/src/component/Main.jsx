@@ -4,11 +4,13 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import SearchPart from './SearchPart';
 import Recipes from './Recipes';
-import Filter from './Filter';
+import Filter from './filter/Filter';
 import 'antd/dist/antd.css';
 import Button from '@material-ui/core/Button';
 import { Icon } from 'antd';
 import { getRecipeByIngredients } from '../functions';
+import GlobalCss from './GlobalCss';
+
 import Container from '@material-ui/core/Container';
 
 const Main = ({ setRecipeId, setRecipeIngredients }) => {
@@ -22,6 +24,7 @@ const Main = ({ setRecipeId, setRecipeIngredients }) => {
       className="w-100"
       style={{ height: '100vh', width: '100%', marginBottom: '5vh', marginTop: '5vh' }}
     >
+      <GlobalCss />
       <Grid item xs={12} style={{ height: '10vh' }}>
         <Filter />
       </Grid>
@@ -39,10 +42,10 @@ const Main = ({ setRecipeId, setRecipeIngredients }) => {
           href="#contained-buttons"
           onClick={() => { getRecipeByIngredients(ingredients, setRecipes) }}
         >
-          {console.log(recipes)};
-          <a name="search-recipes">
-            <Icon type="double-right" />
-          </a>
+
+
+          <Icon type="double-right" />
+
         </Button>
       </Grid>
       <Grid item sm={8} md={8} lg={8} style={{ height: '90vh' }}>
