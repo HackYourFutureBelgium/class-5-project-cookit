@@ -25,7 +25,7 @@ const Main = ({ setRecipeId, setRecipeIngredients }) => {
       <Grid item xs={12} style={{ height: '10vh' }}>
         <Filter />
       </Grid>
-      <Grid item sm={11} md={11} lg={3} style={{ height: '90vh' }}>
+      <Grid item sm={3} md={3} lg={3} style={{ height: '90vh' }}>
         <SearchPart setIngredients={setIngredients} />
       </Grid>
       <Grid
@@ -37,21 +37,22 @@ const Main = ({ setRecipeId, setRecipeIngredients }) => {
           variant="contained"
           color="primary"
           href="#contained-buttons"
-          onClick={() => getRecipeByIngredients(ingredients, setRecipes)}
+          onClick={() => { getRecipeByIngredients(ingredients, setRecipes) }}
         >
+          {console.log(recipes)};
           <a name="search-recipes">
             <Icon type="double-right" />
           </a>
         </Button>
       </Grid>
-      <Grid item sm={12} md={12} lg={8} style={{ height: '90vh' }}>
+      <Grid item sm={8} md={8} lg={8} style={{ height: '90vh' }}>
         <Recipes
           recipes={recipes}
           setRecipeId={setRecipeId}
           setRecipeIngredients={setRecipeIngredients}
         />
       </Grid>
-    </Grid>
+    </Grid >
   );
 };
 export default Main;
