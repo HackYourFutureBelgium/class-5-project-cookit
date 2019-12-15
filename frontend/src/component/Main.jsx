@@ -9,6 +9,8 @@ import 'antd/dist/antd.css';
 import Button from '@material-ui/core/Button';
 import { Icon } from 'antd';
 import { getRecipeByIngredients } from '../functions';
+import GlobalCss from './GlobalCss';
+
 import Container from '@material-ui/core/Container';
 
 const Main = ({ setRecipeId, setRecipeIngredients }) => {
@@ -22,10 +24,11 @@ const Main = ({ setRecipeId, setRecipeIngredients }) => {
       className="w-100"
       style={{ height: '100vh', width: '100%', marginBottom: '5vh', marginTop: '5vh' }}
     >
+      <GlobalCss />
       <Grid item xs={12} style={{ height: '10vh' }}>
-        <Filter/>
+        <Filter />
       </Grid>
-      <Grid item sm={11} md={11} lg={3} style={{ height: '90vh' }}>
+      <Grid item sm={3} md={3} lg={3} style={{ height: '90vh' }}>
         <SearchPart setIngredients={setIngredients} />
       </Grid>
       <Grid
@@ -37,21 +40,22 @@ const Main = ({ setRecipeId, setRecipeIngredients }) => {
           variant="contained"
           color="primary"
           href="#contained-buttons"
-          onClick={() => getRecipeByIngredients(ingredients, setRecipes)}
+          onClick={() => { getRecipeByIngredients(ingredients, setRecipes) }}
         >
-          <a name="search-recipes">
-            <Icon type="double-right" />
-          </a>
+
+
+          <Icon type="double-right" />
+
         </Button>
       </Grid>
-      <Grid item sm={12} md={12} lg={8} style={{ height: '90vh' }}>
+      <Grid item sm={8} md={8} lg={8} style={{ height: '90vh' }}>
         <Recipes
           recipes={recipes}
           setRecipeId={setRecipeId}
           setRecipeIngredients={setRecipeIngredients}
         />
       </Grid>
-    </Grid>
+    </Grid >
   );
 };
 export default Main;

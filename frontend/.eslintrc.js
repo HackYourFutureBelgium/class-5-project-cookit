@@ -3,10 +3,9 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: {
-  "parser": "babel-eslint",
-  "extends": ["airbnb"]
-},
+  extends: [
+    "babel-eslint",
+  ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -21,7 +20,6 @@ module.exports = {
   plugins: [
     'react',
     'jest',
-    // '@babel/plugin-transform-classes'
   ],
   rules: {
     "semi": 0,

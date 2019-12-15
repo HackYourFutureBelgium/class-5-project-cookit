@@ -62,9 +62,9 @@ export default function DetailedExpansionPanel() {
           <div className={classes.column}>
             <Typography className={classes.heading}>Filter</Typography>
           </div>
-      </ExpansionPanelSummary>
+      </ExpansionPanelSummary >
 
-      <ExpansionPanelDetails className={classes.details}>
+      <ExpansionPanelDetails className={classes.details} >
   
           <div className={clsx(classes.column, classes.helper)}>
        <CheckboxesGroup/>
