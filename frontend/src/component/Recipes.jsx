@@ -39,10 +39,10 @@ const Recipes = ({ recipes, setRecipeId, setRecipeIngredients }) => {
                     onClick={() => {
                       setRecipeId(recipe.id);
                       setRecipeIngredients([recipe.usedIngredients, recipe.missedIngredients]);
+
                     }} //move to the recipeDescription component
                   >
                     <Meta title={recipe.title} />
-                    {console.log(recipe)}
                     <Badge variant="danger">{recipe.missedIngredients.length}</Badge>
                     <Badge variant="success">{recipe.usedIngredients.length}</Badge>
                   </Card>
