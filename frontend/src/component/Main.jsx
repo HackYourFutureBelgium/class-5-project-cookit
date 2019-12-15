@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import SearchPart from './SearchPart';
 import Recipes from './Recipes';
-import Filter from './Filter';
+import Filter from '../filter/Filter';
 import 'antd/dist/antd.css';
 import Button from '@material-ui/core/Button';
 import { Icon } from 'antd';
@@ -23,7 +23,7 @@ const Main = ({ setRecipeId, setRecipeIngredients }) => {
       style={{ height: '100vh', width: '100%', marginBottom: '5vh', marginTop: '5vh' }}
     >
       <Grid item xs={12} style={{ height: '10vh' }}>
-        <Filter />
+        <Filter/>
       </Grid>
       <Grid item sm={11} md={11} lg={3} style={{ height: '90vh' }}>
         <SearchPart setIngredients={setIngredients} />

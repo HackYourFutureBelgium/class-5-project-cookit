@@ -3,9 +3,10 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: [
-    // 'airbnb',
-  ],
+  extends: {
+  "parser": "babel-eslint",
+  "extends": ["airbnb"]
+}
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
