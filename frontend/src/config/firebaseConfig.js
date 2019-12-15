@@ -3,15 +3,17 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth'
 
-var config = {
-    apiKey: "AIzaSyAn2EZY3FMtSsGiP3TuIFd9m_U-XYB1Xow",
-    authDomain: "react-redux-firebase-49b2f.firebaseapp.com",
-    databaseURL: "https://react-redux-firebase-49b2f.firebaseio.com",
-    projectId: "react-redux-firebase-49b2f",
-    storageBucket: "react-redux-firebase-49b2f.appspot.com",
-    messagingSenderId: "196455244965"
+var firebaseconfig = {
+  apiKey: "AIzaSyCHCw0nHjUwds38zc9k8rPdkF4UPVzl4DU",
+  authDomain: "hyf-cookit.firebaseapp.com",
+  databaseURL: "https://hyf-cookit.firebaseio.com",
+  projectId: "hyf-cookit",
+  storageBucket: "hyf-cookit.appspot.com",
+  messagingSenderId: "1012416650526",
+  appId: "1:1012416650526:web:f8d0ea5cc159cb61c0fd0f",
+  measurementId: "G-THV5DHRPTL"
   };
 
-  firebase.initializeApp(config);
+  firebase.initializeApp(firebaseconfig);
 
   export default firebase;

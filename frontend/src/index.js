@@ -33,7 +33,7 @@ const store = createStore(
     reduxFirestore(firebaseConfig),
     reactReduxFirebase(firebaseConfig, {
       attachAuthIsReady: true, useFirestoreForProfile: true,
-      userProfile: 'users'
+      userProfile: 'cookit-users'
     })
 
   )

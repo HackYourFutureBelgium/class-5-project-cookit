@@ -10,7 +10,7 @@ const SignInLinks=(props)=>{
     return(
 
         <ul className="right">
-           <li><NavLink to='/create'>New Project</NavLink></li>
+           <li><NavLink to='/create'>My Recipes</NavLink></li>
            <li><a onClick={props.signOut}>Log Out</a></li>
            <li><NavLink to='/' href="#" className="btn btn-floating red">
            {props.profile.monogram}

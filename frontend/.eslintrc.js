@@ -4,7 +4,7 @@ module.exports = {
     es6: true,
   },
   extends: [
-    // 'airbnb',
+    "babel-eslint",
   ],
   globals: {
     Atomics: 'readonly',
@@ -20,7 +20,6 @@ module.exports = {
   plugins: [
     'react',
     'jest',
-    // '@babel/plugin-transform-classes'
   ],
   rules: {
     "semi": 0,

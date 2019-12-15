@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import SearchPart from './SearchPart';
 import Recipes from './Recipes';
-import Filter from './filter/Filter';
+import Filter from '../filter/Filter';
 import 'antd/dist/antd.css';
 import Button from '@material-ui/core/Button';
 import { Icon } from 'antd';
