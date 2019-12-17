@@ -13,21 +13,23 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     height: '100vh',
     padding: '2vw',
-    backgroundImage: 'url(' + background + ')',
-    backgroundSize: 'cover',
-    display: 'block', //recipeId ? 'block' : 'none',
-    backgroundPosition: 'bottom',
-    maxWidth: '100%',
-    backgroundRepeat: 'no-repeat',
+    /*backgroundImage: 'url(' + background + ')',
+      backgroundSize: 'cover',
+      display: 'block', //recipeId ? 'block' : 'none',
+      backgroundPosition: 'bottom',
+      maxWidth: '100%',
+      backgroundRepeat: 'no-repeat',*/
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
     color: '#009000',
-    height: '50vh',
+    height: '70vh',
     overflowY: 'scroll',
+    opacity: 0.9,
   },
 }));
+
 let Ingredients = ({ ingredients, substitutes }) => {
   const classes = useStyles();
   return (
@@ -42,12 +44,13 @@ let Ingredients = ({ ingredients, substitutes }) => {
         }}
       >
         INGREDIENTS
-      </h4>
+  </h4>
       <Paper className={classes.paper}>
         <div
           className="usedIngredients"
           style={{
             margin: '3px',
+
           }}
         >
           {ingredients[0] ? (
@@ -67,14 +70,14 @@ let Ingredients = ({ ingredients, substitutes }) => {
               );
             })
           ) : (
-            <p
-              style={{
-                color: '#009000',
-              }}
-            >
-              NO USED INGREDIENTS YET
-            </p>
-          )}
+              <p
+                style={{
+                  color: '#009000',
+                }}
+              >
+                NO USED INGREDIENTS YET
+        </p>
+            )}
         </div>
         <div className="missedIngredients" style={{}}>
           {ingredients[1] ? (
@@ -92,27 +95,27 @@ let Ingredients = ({ ingredients, substitutes }) => {
                     <span className="unit">{item.unit} </span>
                     <span className="name">{item.name} </span>
                   </p>
-                  {substitutes[key] != 'no substitute' ? (
+                  {substitutes[key] != 'no substitute' ?
                     <p
                       style={{
                         color: '#F5C71A',
                       }}
                     >
-                      <span>{substitutes[key]}</span>
+                      <span> | </span> <span>{substitutes[key]}</span> <span> | </span>
                     </p>
-                  ) : null}
+                    : null}
                 </>
               );
             })
           ) : (
-            <p
-              style={{
-                color: '#D0001B',
-              }}
-            >
-              NO MISSED INGREDIENTS YET
-            </p>
-          )}
+              <p
+                style={{
+                  color: '#D0001B',
+                }}
+              >
+                NO MISSED INGREDIENTS YET
+        </p>
+            )}
         </div>
       </Paper>
     </div>
@@ -131,20 +134,20 @@ let Instructions = ({ instructions }) => {
           color: '#FFFFFF',
         }}
       >
-        <a name="get-instructions">INSTRUCTIONS</a>
+        INSTRUCTIONS
       </h4>
       <Paper className={classes.paper}>
         {instructions ? (
           instructions.map((item, key) => <p key={key}>- {item}</p>)
         ) : (
-          <div
-            style={{
-              color: '#009000',
-            }}
-          >
-            NO INSTRUCTIONS YET
-          </div>
-        )}
+            <div
+              style={{
+                color: '#009000',
+              }}
+            >
+              NO INSTRUCTIONS YET
+      </div>
+          )}
       </Paper>
     </div>
   );
@@ -160,18 +163,19 @@ let RecipeDescription = ({ recipeId, recipeIngredients }) => {
   }, [recipeId]);
   const classes = useStyles();
   return (
-    <Container className={classes.root}>
-      <Grid container style={{ height: '100%' }}>
-        <Grid item xs={4} style={{ paddingRight: '2vw' }}>
-          {console.log('ING')}
-          <Ingredients ingredients={recipeIngredients} substitutes={substitutes} />
+    <>
+      <a name="get-instructions"></a>
+      <Container className={classes.root}>
+        <Grid container style={{ height: '100%' }}>
+          <Grid item xs={4} style={{ paddingRight: '2vw' }}>
+            <Ingredients ingredients={recipeIngredients} substitutes={substitutes} />
+          </Grid>
+          <Grid item xs={8}>
+            <Instructions instructions={instructions} />
+          </Grid>
         </Grid>
-        <Grid item xs={8}>
-          {console.log('INST')}
-          <Instructions instructions={instructions} />
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </>
   );
 };
 export default RecipeDescription;

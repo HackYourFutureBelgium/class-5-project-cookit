@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const convert = require('convert-units');
 const react = require('react');
 
-let apiKey = '5056159cedfd4b88b2e309152dabbc6c';//'b4de2c0484f94d2d9480cb6f2cc6fe9a'; //'699883d42efa4b0297fb8daccb5430aa';
+let apiKey = 'b4de2c0484f94d2d9480cb6f2cc6fe9a'; //'699883d42efa4b0297fb8daccb5430aa'; '5056159cedfd4b88b2e309152dabbc6c';//
 
 
 async function getRecipeByIngredients(ingredentsArray, setRecipes) {
@@ -103,11 +103,11 @@ function analyzeSubstitutes(substitutesList, missedUnit, missedAmount, missedIng
         subObj.substitute = [subAmount, ' ', subUnit, ' ', words.join(' ')];
       }
 
-      subObj.substitute.push('<br />');
+
       return subObj.substitute;
     })
 
-    return analyzedSubstitutes;
+    return analyzedSubstitutes[0];
   }
 }
 
