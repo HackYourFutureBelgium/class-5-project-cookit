@@ -21,7 +21,13 @@ const Recipes = ({ recipes, setRecipeId, setRecipeIngredients }) => {
         <Grid
           container
           spacing={6}
-          style={{ height: '100%', overflow: 'auto', paddingTop: '0', marginTop: '0' }}
+          style={{
+            height: '100%',
+            overflow: 'auto',
+            paddingTop: '0',
+            marginTop: '0',
+            backgroundColor: '#F5F5F5',
+          }}
         >
           {recipes ? (
             recipes.map((recipe, key) => {
@@ -39,19 +45,29 @@ const Recipes = ({ recipes, setRecipeId, setRecipeIngredients }) => {
                     onClick={() => {
                       setRecipeId(recipe.id);
                       setRecipeIngredients([recipe.usedIngredients, recipe.missedIngredients]);
-
                     }} //move to the recipeDescription component
                   >
                     <Meta title={recipe.title} />
-                    <Badge variant="danger">{recipe.missedIngredients.length}</Badge>
-                    <Badge variant="success">{recipe.usedIngredients.length}</Badge>
+                    <Badge style={{ backgroundColor: 'rgba(187, 18, 42)', color: 'white' }}>
+                      {recipe.missedIngredients.length}
+                    </Badge>
+                    <Badge style={{ backgroundColor: '	rgb(60,179,113,0.9)', color: 'white' }}>
+                      {recipe.usedIngredients.length}
+                    </Badge>
                   </Card>
                 </Grid>
               );
             })
           ) : (
-              <div>PLEASE TYPE IN INGREDIENTS</div>
-            )}
+            <div
+              className="container"
+              style={{
+                textAlign: 'center',
+              }}
+            >
+              PLEASE TYPE IN INGREDIENTS
+            </div>
+          )}
         </Grid>
       </Container>
     </>

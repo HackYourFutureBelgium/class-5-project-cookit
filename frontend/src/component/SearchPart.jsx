@@ -9,8 +9,6 @@ import ingredients from '../ingredients';
 import { maxHeight } from '@material-ui/system';
 import GlobalCss from './GlobalCss';
 
-
-
 const useStyles = makeStyles(theme => ({
   root: {
     width: 221,
@@ -84,8 +82,8 @@ const useStyles = makeStyles(theme => ({
     margin: 0,
     color: '#586069',
     fontSize: 13,
-    height: '65vh',
-    maxHeight: 'none !important' ////
+    height: '50vh',
+    maxHeight: 'none !important', ////
   },
   //ingredient options
   option: {
@@ -129,9 +127,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
-
-
 export default function SearchPart({ setIngredients }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -150,7 +145,7 @@ export default function SearchPart({ setIngredients }) {
   };
 
   return (
-    <div className='select_ingredients'>
+    <div className="select_ingredients">
       <GlobalCss />
       <Autocomplete
         open
@@ -205,7 +200,9 @@ export default function SearchPart({ setIngredients }) {
       />
       <Button
         variant="contained"
-        onClick={() => { setSaved(value) }}
+        onClick={() => {
+          setSaved(value);
+        }}
         style={{ marginTop: '5px' }}
       >
         Save List
@@ -216,7 +213,3 @@ export default function SearchPart({ setIngredients }) {
 }
 
 const labels = ingredients;
-
-
-
-

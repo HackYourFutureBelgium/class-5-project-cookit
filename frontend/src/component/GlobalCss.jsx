@@ -8,15 +8,15 @@ const GlobalCss = withStyles({
     '.MuiAutocomplete-paper>ul': {
       maxHeight: 'unset',
       height: '100%',
-      overflow: 'scroll'
+      overflow: 'scroll',
     },
-    '.MuiGrid-grid-lg-3': {
+    '.MuiGrid-grid-lg-4': {
       zIndex: '1',
     },
 
     '.MuiGrid-grid-xs-12': {
       zIndex: '2',
-    }
+    },
   },
 })(() => null);
 

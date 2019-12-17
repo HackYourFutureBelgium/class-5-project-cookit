@@ -10,7 +10,6 @@ class MainMenu extends Component {
       <BrowserRouter>
         <div className="MainMenu">
           <Navbar />
-
           <Switch>
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />
