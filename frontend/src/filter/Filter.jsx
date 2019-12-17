@@ -53,7 +53,7 @@ export default function DetailedExpansionPanel() {
 
   return (
     <div className={classes.root}>
-      <ExpansionPanel >
+      <ExpansionPanel style={{ backgroundColor: '#F5F5F5' }}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1c-content"
@@ -62,21 +62,20 @@ export default function DetailedExpansionPanel() {
           <div className={classes.column}>
             <Typography className={classes.heading}>Filter</Typography>
           </div>
-      </ExpansionPanelSummary >
+        </ExpansionPanelSummary>
 
-      <ExpansionPanelDetails className={classes.details} >
-  
+        <ExpansionPanelDetails className={classes.details}>
           <div className={clsx(classes.column, classes.helper)}>
-       <CheckboxesGroup/>
+            <CheckboxesGroup />
           </div>
           <div className={clsx(classes.column, classes.helper)}>
-        <SwitchesGroup/>
+            <SwitchesGroup />
           </div>
           <div className={clsx(classes.column, classes.helper)}>
-         <RangeSlider/>
+            <RangeSlider />
           </div>
         </ExpansionPanelDetails>
-      
+
         <Divider />
         <ExpansionPanelActions>
           <Button size="small">Cancel</Button>

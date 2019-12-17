@@ -23,16 +23,17 @@ const FirstSection = () => {
           </h2>
           <Button
             variant="contained"
-            color="primary"
             href="#contained-buttons"
             style={{
-              backgroundColor: 'red',
+              backgroundColor: '#D0001B',
               position: 'absolute',
               right: 0,
               bottom: -55,
             }}
           >
-            Search Recipes
+            <a href="#get-search " style={{ color: 'white', textDecoration: 'none' }}>
+              Search Recipes
+            </a>
           </Button>
         </div>
       </Container>
