@@ -23,7 +23,6 @@ const FirstSection = () => {
           </h2>
           <Button
             variant="contained"
-            href="#contained-buttons"
             style={{
               backgroundColor: '#D0001B',
               position: 'absolute',

@@ -11,7 +11,7 @@ import GlobalCss from './GlobalCss';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: 221,
+    width: '100%',
     fontSize: 13,
   },
   button: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     border: '1px solid rgba(27,31,35,.15)',
     boxShadow: '0 3px 12px rgba(27,31,35,.15)',
     borderRadius: 3,
-    width: 300,
+    width: '100%',
     marginLeft: 5,
   },
   tag: {
@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     border: '1px solid rgba(27,31,35,.15)',
     boxShadow: '0 3px 12px rgba(27,31,35,.15)',
     borderRadius: 3,
-    width: 300,
+    width: '100%',
     zIndex: 1,
     fontSize: 13,
     color: '#586069',
@@ -82,7 +82,7 @@ const useStyles = makeStyles(theme => ({
     margin: 0,
     color: '#586069',
     fontSize: 13,
-    height: '50vh',
+    height: '60vh',
     maxHeight: 'none !important', ////
   },
   //ingredient options
@@ -198,16 +198,7 @@ export default function SearchPart({ setIngredients }) {
           />
         )}
       />
-      <Button
-        variant="contained"
-        onClick={() => {
-          setSaved(value);
-        }}
-        style={{ marginTop: '5px' }}
-      >
-        Save List
-      </Button>
-      {console.log('SAVED :', saved)}
+
     </div>
   );
 }

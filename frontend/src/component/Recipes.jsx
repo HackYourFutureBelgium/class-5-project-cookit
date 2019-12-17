@@ -8,66 +8,74 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-const Recipes = ({ recipes, setRecipeId, setRecipeIngredients }) => {
+const Recipes = ({ recipes, setRecipeId, setRecipeIngredients, setSavedRecipes, savedRecipes }) => {
+
+  let recipeToDatabse = (recipe) => {
+    if (includes(recipe)) {
+      let new_arr = savedRecipes.filter(item => item.id != recipe.id)
+      setSavedRecipes(new_arr);
+    } else {
+      //let new_arr = savedRecipes;
+      //new_arr.push(recipe);
+      setSavedRecipes([...savedRecipes, recipe]);
+    }
+  }
+
+  function includes(rec) {
+    let savedRecipeIds = savedRecipes ? savedRecipes.map(item => item.id) : [];
+    return savedRecipeIds.includes(rec.id)
+  }
+
   return (
     <>
-      <CssBaseline />
       <Container
         style={{
-          padding: 'auto',
           height: '100%',
+          padding: 0,
         }}
       >
         <Grid
           container
           spacing={6}
           style={{
-            height: '100%',
-            overflow: 'auto',
-            paddingTop: '0',
-            marginTop: '0',
-            backgroundColor: '#F5F5F5',
+            height: '92%', overflow: 'auto', padding: '0', margin: '0', marginTop: '2%', width: '100%',
           }}
         >
           {recipes ? (
             recipes.map((recipe, key) => {
               return (
-                <Grid item xs={12} sm={6} md={4} lg={4} key={key}>
+                <Grid item xs={12} sm={6} md={4} lg={4} key={key} >
                   <Card
-                    style={{ width: 215 }}
+                    style={{ width: 215, margin: 'auto' }}
                     cover={<img alt="example" src={recipe.image} />}
                     actions={[
-                      <Icon type="heart" />,
+                      <Icon
+                        type="heart"
+                        theme={includes(recipe) ? 'filled' : ''}
+                        style={{ color: includes(recipe) ? 'red' : 'grey' }}
+                        onClick={() => { recipeToDatabse(recipe) }}
+                      />,
                       <a href="#get-instructions">
-                        <Icon type="double-right" />
+                        <Icon
+                          type="double-right"
+                          onClick={() => {
+                            setRecipeId(recipe.id);
+                            setRecipeIngredients([recipe.usedIngredients, recipe.missedIngredients]);
+
+                          }} />
                       </a>,
                     ]}
-                    onClick={() => {
-                      setRecipeId(recipe.id);
-                      setRecipeIngredients([recipe.usedIngredients, recipe.missedIngredients]);
-                    }} //move to the recipeDescription component
                   >
                     <Meta title={recipe.title} />
-                    <Badge style={{ backgroundColor: 'rgba(187, 18, 42)', color: 'white' }}>
-                      {recipe.missedIngredients.length}
-                    </Badge>
-                    <Badge style={{ backgroundColor: '	rgb(60,179,113,0.9)', color: 'white' }}>
-                      {recipe.usedIngredients.length}
-                    </Badge>
+                    <Badge variant="danger">{recipe.missedIngredients.length}</Badge>
+                    <Badge variant="success">{recipe.usedIngredients.length}</Badge>
                   </Card>
                 </Grid>
               );
             })
           ) : (
-            <div
-              className="container"
-              style={{
-                textAlign: 'center',
-              }}
-            >
-              PLEASE TYPE IN INGREDIENTS
-            </div>
-          )}
+              <div style={{ margin: 'auto' }}>PLEASE TYPE IN INGREDIENTS</div>
+            )}
         </Grid>
       </Container>
     </>

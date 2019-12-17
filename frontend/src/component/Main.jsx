@@ -13,40 +13,33 @@ import GlobalCss from './GlobalCss';
 import search from '../search.jpg';
 import Container from '@material-ui/core/Container';
 
-const Main = ({ setRecipeId, setRecipeIngredients }) => {
+
+
+const Main = ({ setRecipeId, setRecipeIngredients, setSavedRecipes, savedRecipes }) => {
   let [ingredients, setIngredients] = useState('');
   let [recipes, setRecipes] = useState('');
 
   return (
-    <Grid
-      container
-      spacing={0}
-      className="w-100"
-      style={{ height: '100vh', width: '100%', marginBottom: '5vh', marginTop: '5vh' }}
-    >
-      <GlobalCss />
-      <Grid item xs={12} style={{ height: '10vh' }}>
-        <a name="get-search"></a>
-        <Filter />
-      </Grid>
+    <>
+      <a name="get-search"></a>
       <Grid
-        item
-        sm={4}
-        md={4}
-        lg={4}
-        style={{
-          height: '90vh',
-          backgroundImage: 'url(' + search + ')',
-          backgroundPosition: 'bottom',
-          backgroundSize: 'cover',
-          display: 'flex',
-          justifyContent: 'center',
-        }}
+        container
+        spacing={0}
+        className="w-100"
+        style={{ height: '100vh', width: '100%', padding: '2vw' }}
       >
-        <Grid item sm={10}>
-          <SearchPart setIngredients={setIngredients} />
+
+        <GlobalCss />
+        <Grid item xs={12} style={{ height: '10%' }}>
+
+          <Filter />
         </Grid>
-        <div>
+        <Grid item sm={3} md={3} lg={3} style={{ height: '90%', }} >
+          <Grid item sm={12}>
+            <SearchPart setIngredients={setIngredients} />
+          </Grid>
+        </Grid>
+        <Grid item sm={1} style={{ margin: 'auto', paddingLeft: '2vw' }}>
           <Button
             variant="contained"
             size="large"
@@ -62,16 +55,22 @@ const Main = ({ setRecipeId, setRecipeIngredients }) => {
           >
             <Icon type="double-right" />
           </Button>
-        </div>
+        </Grid>
+        <Grid item sm={8} md={8} lg={8} style={{
+          height: '90%'
+        }}>
+
+          <Recipes
+            recipes={recipes}
+            setRecipeId={setRecipeId}
+            setRecipeIngredients={setRecipeIngredients}
+            setSavedRecipes={setSavedRecipes}
+            savedRecipes={savedRecipes}
+          />
+
+        </Grid>
       </Grid>
-      <Grid item sm={8} md={8} lg={8} style={{ height: '90vh' }}>
-        <Recipes
-          recipes={recipes}
-          setRecipeId={setRecipeId}
-          setRecipeIngredients={setRecipeIngredients}
-        />
-      </Grid>
-    </Grid>
+    </>
   );
 };
 export default Main;

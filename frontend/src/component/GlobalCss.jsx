@@ -9,11 +9,14 @@ const GlobalCss = withStyles({
       maxHeight: 'unset',
       height: '100%',
       overflow: 'scroll',
+      width: '100%'
     },
-    '.MuiGrid-grid-lg-4': {
+    '.MuiGrid-grid-lg-3': {
       zIndex: '1',
     },
-
+    '.MuiGrid-grid-lg-8': {
+      zIndex: '1',
+    },
     '.MuiGrid-grid-xs-12': {
       zIndex: '2',
     },
