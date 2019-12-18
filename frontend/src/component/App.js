@@ -5,7 +5,7 @@ import Main from './Main';
 import RecipeDetails from './RecipeDetails';
 import UserSavedData from './UserSavedData'
 import background from '../backgroundvertical.jpg';
-
+import Footer from './Footer';
 import '../App.css'
 
 
@@ -29,6 +29,7 @@ let App = () => {
         <Main setRecipeId={setRecipeId} setRecipeIngredients={setRecipeIngredients} setSavedRecipes={setSavedRecipes} savedRecipes={savedRecipes} />
         <RecipeDetails recipeId={recipeId} recipeIngredients={recipeIngredients} />
         <UserSavedData savedRecipes={savedRecipes} setSavedRecipes={setSavedRecipes} />
+        <Footer/>
       </div>
     </>
   );
