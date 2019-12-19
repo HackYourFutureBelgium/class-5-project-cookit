@@ -2,7 +2,10 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {signUp} from '../../store/actions/authActions';
- 
+import Modal from 'react-awesome-modal';
+import './signin.css'
+
+
 class SignUp extends Component {
 
   constructor() {
@@ -13,10 +16,25 @@ class SignUp extends Component {
       password: '',
       firstName: '',
       lastName: '',
+      visible : true,
+      isSignedIn: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     };
+
+    openModal() {
+      this.setState({
+          visible : true
+      });
+  }
+
+  closeModal() {
+      this.setState({
+          visible : false, 
+
+      });this.props.history.push('/')
+  }
  
   handleChange(e) {
     this.setState({
@@ -35,41 +53,49 @@ class SignUp extends Component {
 
     if(auth.uid) return <Redirect to='/' />
   return (
-    <div className="container">
-      <form className="white" onSubmit={this.handleSubmit}>
-        <h5 className="grey-text text-darken-3">Sign Up</h5>
-       
-        <div className="input-field">
-          <label htmlFor="email">Email</label>
-          <input type="email" id='email' onChange={this.handleChange} />
-        </div>
-       
-        <div className="input-field">
-          <label htmlFor="password">Password</label>
-          <input type="password" id='password' onChange={this.handleChange}/>
-        </div>
-       
-        <div className="input-field">
-          <label htmlFor="firstName">First Name</label>
-          <input type="text" id='firstName' onChange={this.handleChange}/>
-        </div>
-      
-        <div className="input-field">
-          <label htmlFor="lastName">Last Name</label>
-          <input type="text" id='lastName'onChange={this.handleChange} />
-        </div>
-        <div className="input-field">
-          <button className="btn blue lighten-1 z-depth-0">Sign Up</button>
-          <div className="red-text center">
-          
+<Modal 
+    visible={this.state.visible}
+    effect="fadeInUp"
+    onClickAway={() => this.closeModal() }
+>
+     <div className="container" >
+     <form className="white" onSubmit={this.handleSubmit} style={{width:'350px' ,height:'450px', marginLeft:'1em'}}>
+                <h3 className="center">Sign Up</h3>
+
+                <div className="form-group">
+                    <label>Email Address</label>
+                    <input type="email" className="form-control" placeholder="Enter email" id='email' onChange={this.handleChange}/>
+                </div>
+
+                <div className="form-group">
+                    <label>Password</label>
+                    <input type="password" className="form-control" placeholder="Enter password" id='password' onChange={this.handleChange}/>
+                </div>
+
+                <div className="form-group">
+                    <label>First Name</label>
+                    <input type="firstName" className="form-control" placeholder="Enter first name" id='firstName' onChange={this.handleChange}/>
+                </div>
+                <div className="form-group">
+                    <label>Last Name</label>
+                    <input type="lastName" className="form-control" placeholder="Enter last name" id='lastName' onChange={this.handleChange}/>
+                </div>
+
+                <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+                <div className="red-text center">
+           
               {authError ? <p>{authError}</p>: null}
-          </div>
-        </div>
-      </form>
-    </div>
+            </div>
+            <p className="extra text-center">
+            Already Have an Account? <a href="./signin">Sign In</a>
+                </p>
+            </form>
+      </div>
+      </Modal>
 )
 }
 }
+
 
 const mapDispatchToProps=(dispatch)=>{
   return {

@@ -1,0 +1,20 @@
+.modal{
+  min-width: 400px;
+  min-height: 500px;
+ 
+
+}
+
+.container {
+  min-width: 400px;
+  min-height: 500px;
+  margin-left: 1em;
+}
+
+.login-form{
+  margin-top: 2em;
+}
+
+.extra{
+  margin-top: 2em;
+}
